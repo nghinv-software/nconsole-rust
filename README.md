@@ -2,6 +2,8 @@
 
 RConsole is a logging library for Rust, supports sending logs to WebSocket server and supports multiple log types.
 
+![Demo NConsole](https://github.com/nghinv-software/nconsole-flutter/blob/main/assets/demo_nconsole.png)
+
 ## Installation
 
 Add dependency to `Cargo.toml`:
