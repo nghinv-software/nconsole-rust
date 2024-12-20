@@ -1,5 +1,5 @@
 [package]
-name = "nconsole"
+name = "rconsole"
 version = "1.0.0"
 edition = "2021"
 description = "A WebSocket-based logging library for Rust"
@@ -8,7 +8,7 @@ authors = ["NghiNV <nghinv990@gmail.com>"]
 
 [lib]
 path = "src/lib.rs"
- crate-type = ["cdylib", "rlib"]
+crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 tungstenite = "0.20"

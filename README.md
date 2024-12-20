@@ -1,58 +1,61 @@
-# NConsole
+# RConsole
 
-NConsole là một thư viện logging cho Rust, cho phép gửi log tới WebSocket server và hỗ trợ nhiều kiểu log khác nhau.
+RConsole is a logging library for Rust, supports sending logs to WebSocket server and supports multiple log types.
 
-## Cài đặt
+## Installation
 
-Thêm dependency vào file `Cargo.toml`:
+Add dependency to `Cargo.toml`:
 
 ```toml
 [dependencies]
-nconsole = "1.0.0"
+rconsole = "1.0.0"
 ```
 
-## Sử dụng
+App desktop download [NConsole](https://drive.google.com/drive/folders/1P4cqXhalzsiPtrVAKWvoD9tK_pt9ZpzJ?usp=share_link)
 
-Thêm `use nconsole::NConsole;` vào file cần sử dụng.
+## Usage
+
+Add `use rconsole::RConsole;` to the file you want to use.
 
 ```rust
-use nconsole::NConsole;
+use rconsole::RConsole;
 use serde_json::json;
 
 fn main() {
     // Set URI WebSocket server
-    NConsole::set_uri("ws://localhost:9090");
-    // Bật hoặc tắt logging
-    NConsole::is_enable(true);
+    RConsole::set_uri("ws://localhost:9090");
+    // Enable or disable logging
+    RConsole::is_enable(true);
 
-    NConsole::log("Hello, Rustaceans!");
-    NConsole::error("Hello, Rustaceans!");
-    NConsole::warn("Hello, Rustaceans!");
-    NConsole::info("Hello, Rustaceans!");
+    RConsole::log("Hello, Rustaceans!");
+    RConsole::error("Hello, Rustaceans!");
+    RConsole::warn("Hello, Rustaceans!");
+    RConsole::info("Hello, Rustaceans!");
 
-    NConsole::group("Group 1");
-    NConsole::log("Hello, Rustaceans!", "log", &json!({"name": "John", "age": 30}).to_string());
-    NConsole::group_end();
+    RConsole::group("Group 1");
+    RConsole::log("Hello, Rustaceans!", "log", &json!({"name": "John", "age": 30}).to_string());
+    RConsole::group_end();
 
-    NConsole::group_collapse("Group 2");
-    NConsole::log("Hello, Rustaceans!", "log", &json!({"name": "John", "age": 30}).to_string());
-    NConsole::group_end();
+    RConsole::group_collapse("Group 2");
+    RConsole::log("Hello, Rustaceans!", "log", &json!({"name": "John", "age": 30}).to_string());
+    RConsole::group_end();
 
-    NConsole::log("%cLog with color", "color: red", &json!({"name": "John", "age": 30}).to_string()); 
+    RConsole::log("%cLog with color", "color: red", &json!({"name": "John", "age": 30}).to_string()); 
 
     // Log with multiple data
-    NConsole::log("Log with multiple data", "log", &json!({"name": "John", "age": 30, "address": "123 Main St"}).to_string(), &json!({"name": "Jane", "age": 25, "address": "456 Main St"}).to_string());  
+    RConsole::log("Log with multiple data", "log", &json!({"name": "John", "age": 30, "address": "123 Main St"}).to_string(), &json!({"name": "Jane", "age": 25, "address": "456 Main St"}).to_string());  
 }
 ```
 
-## Các kiểu log
+## Log types
 
-- `log`: Log thông thường
-- `error`: Log lỗi
-- `warn`: Log cảnh báo
-- `info`: Log thông tin
-- `group`: Log theo nhóm
-- `groupCollapsed`: Log theo nhóm và collapse
+- `log`: Normal log
+- `error`: Error log
+- `warn`: Warning log
+- `info`: Info log
+- `group`: Log by group
+- `groupCollapsed`: Log by group and collapse
+- `group_end`: End group
 
 # Author
 

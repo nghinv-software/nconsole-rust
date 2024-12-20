@@ -110,7 +110,7 @@ impl WebConsole {
     }
 }
 
-pub struct NConsole;
+pub struct RConsole;
 
 #[derive(Debug, Serialize)]
 #[serde(untagged)]
@@ -133,7 +133,7 @@ impl From<serde_json::Value> for LogArg {
     }
 }
 
-impl NConsole {
+impl RConsole {
     pub fn set_uri(uri: &str) {
         let console = WebConsole::get_instance();
         console.uri = WebConsole::get_uri(Some(uri));
@@ -228,28 +228,28 @@ mod tests {
 
     #[test]
     fn test_basic_logging() {
-        NConsole::set_uri("10.10.30.40");
-        NConsole::is_enable(true);
+        RConsole::set_uri("10.10.30.40");
+        RConsole::is_enable(true);
 
         // Test basic logging
-        NConsole::log(&["Hello, World!"]);
-        NConsole::info(&["Server started"]);
-        NConsole::warn(&["Memory usage high"]);
-        NConsole::error(&["Connection failed"]);
+        RConsole::log(&["Hello, World!"]);
+        RConsole::info(&["Server started"]);
+        RConsole::warn(&["Memory usage high"]);
+        RConsole::error(&["Connection failed"]);
 
         // Test group logging
-        NConsole::group("Test Group");
-        NConsole::log(&["Inside group"]);
-        NConsole::group_end();
+        RConsole::group("Test Group");
+        RConsole::log(&["Inside group"]);
+        RConsole::group_end();
 
         // Test collapsed group
-        NConsole::group_collapsed("Collapsed Group");
-        NConsole::log(&[
+        RConsole::group_collapsed("Collapsed Group");
+        RConsole::log(&[
             "%cInside collapsed group",
             "color: green; font-size: 20px; font-weight: bold",
             &json!({"name": "name", "age": 18}).to_string(),
         ]);
-        NConsole::group_end();
+        RConsole::group_end();
 
         // wait 1 seconds
         std::thread::sleep(std::time::Duration::from_secs(1));
@@ -258,27 +258,27 @@ mod tests {
     #[test]
     fn test_uri_formatting() {
         // Test default URI
-        assert_eq!(WebConsole::get_uri(None), "ws://localhost:9090");
+        assert_eq!(RConsole::get_uri(None), "ws://localhost:9090");
 
         // Test with IP address without port
         assert_eq!(
-            WebConsole::get_uri(Some("192.168.1.1")),
+            RConsole::get_uri(Some("192.168.1.1")),
             "ws://192.168.1.1:9090"
         );
 
         // Test with localhost without port
-        assert_eq!(WebConsole::get_uri(Some("localhost")), "ws://localhost");
+        assert_eq!(RConsole::get_uri(Some("localhost")), "ws://localhost");
 
         // Test with full URI
         assert_eq!(
-            WebConsole::get_uri(Some("ws://example.com:8080")),
+            RConsole::get_uri(Some("ws://example.com:8080")),
             "ws://example.com:8080"
         );
 
         // Test with custom domain without port
-        assert_eq!(WebConsole::get_uri(Some("example.com")), "ws://example.com");
+        assert_eq!(RConsole::get_uri(Some("example.com")), "ws://example.com");
 
         // Test with spaces
-        assert_eq!(WebConsole::get_uri(Some(" localhost ")), "ws://localhost");
+        assert_eq!(RConsole::get_uri(Some(" localhost ")), "ws://localhost");
     }
 }
