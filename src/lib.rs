@@ -258,27 +258,27 @@ mod tests {
     #[test]
     fn test_uri_formatting() {
         // Test default URI
-        assert_eq!(RConsole::get_uri(None), "ws://localhost:9090");
+        assert_eq!(WebConsole::get_uri(None), "ws://localhost:9090");
 
         // Test with IP address without port
         assert_eq!(
-            RConsole::get_uri(Some("192.168.1.1")),
+            WebConsole::get_uri(Some("192.168.1.1")),
             "ws://192.168.1.1:9090"
         );
 
         // Test with localhost without port
-        assert_eq!(RConsole::get_uri(Some("localhost")), "ws://localhost");
+        assert_eq!(WebConsole::get_uri(Some("localhost")), "ws://localhost");
 
         // Test with full URI
         assert_eq!(
-            RConsole::get_uri(Some("ws://example.com:8080")),
+            WebConsole::get_uri(Some("ws://example.com:8080")),
             "ws://example.com:8080"
         );
 
         // Test with custom domain without port
-        assert_eq!(RConsole::get_uri(Some("example.com")), "ws://example.com");
+        assert_eq!(WebConsole::get_uri(Some("example.com")), "ws://example.com");
 
         // Test with spaces
-        assert_eq!(RConsole::get_uri(Some(" localhost ")), "ws://localhost");
+        assert_eq!(WebConsole::get_uri(Some(" localhost ")), "ws://localhost");
     }
 }

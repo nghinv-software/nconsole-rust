@@ -29,23 +29,22 @@ fn main() {
     // Enable or disable logging
     RConsole::is_enable(true);
 
-    RConsole::log("Hello, Rustaceans!");
-    RConsole::error("Hello, Rustaceans!");
-    RConsole::warn("Hello, Rustaceans!");
-    RConsole::info("Hello, Rustaceans!");
+    RConsole::log(&["Hello, World!"]);
+        RConsole::info(&["Server started"]);
+        RConsole::warn(&["Memory usage high"]);
+        RConsole::error(&["Connection failed"]);
 
-    RConsole::group("Group 1");
-    RConsole::log("Hello, Rustaceans!", "log", &json!({"name": "John", "age": 30}).to_string());
-    RConsole::group_end();
+        RConsole::group("Test Group");
+        RConsole::log(&["Inside group"]);
+        RConsole::group_end();
 
-    RConsole::group_collapse("Group 2");
-    RConsole::log("Hello, Rustaceans!", "log", &json!({"name": "John", "age": 30}).to_string());
-    RConsole::group_end();
-
-    RConsole::log("%cLog with color", "color: red", &json!({"name": "John", "age": 30}).to_string()); 
-
-    // Log with multiple data
-    RConsole::log("Log with multiple data", "log", &json!({"name": "John", "age": 30, "address": "123 Main St"}).to_string(), &json!({"name": "Jane", "age": 25, "address": "456 Main St"}).to_string());  
+        RConsole::group_collapsed("Collapsed Group");
+        RConsole::log(&[
+            "%cInside collapsed group",
+            "color: green; font-size: 20px; font-weight: bold",
+            &json!({"name": "name", "age": 18}).to_string(),
+        ]);
+        RConsole::group_end();
 }
 ```
 
